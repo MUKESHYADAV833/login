@@ -1,0 +1,26 @@
+<div class="login-container">
+    <div class="login-card">
+        <p class="heading">Login</p>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group"><label for="username">Username</label><input id="username"
+                    formControlName="username" type="text" class="form-control" />
+                <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid"><small
+                        *ngIf="loginForm.get('username')?.errors?.['required']" class="error-text">Username is
+                        required.</small></div>
+            </div>
+            <div class="form-group"><label for="password">Password</label><input id="password"
+                    formControlName="password" type="password" class="form-control" />
+                <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"><small
+                        *ngIf="loginForm.get('password')?.errors?.['required']" class="error-text">Password is
+                        required.</small><small *ngIf="loginForm.get('password')?.errors?.['minlength']"
+                        class="error-text">
+                        Password must be at least 8 characters long.
+                    </small></div>
+            </div>
+            <div class="form-group"><input type="checkbox" formControlName="rememberMe" /> Remember Me
+            </div><button type="submit" [disabled]="loginForm.invalid" class="btn-submit">Login</button>
+        </form>
+        <div *ngIf="loading" class="spinner">Loading...</div>
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    </div>
+</div>
